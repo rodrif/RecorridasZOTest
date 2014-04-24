@@ -3,6 +3,9 @@ package com.recorridaszo.recorridaszo.test;
 import com.google.android.gms.maps.model.LatLng;
 import com.recorridaszo.BDLocal.ManejadorBDLocal;
 import com.recorridaszo.persona.Persona;
+import com.recorridaszo.persona.Personas;
+import com.recorridaszo.recorridaszo.Utils;
+
 import android.database.Cursor;
 import android.test.AndroidTestCase;
 
@@ -59,20 +62,24 @@ public class BDLocalTest extends AndroidTestCase {
 
 	public void testGuardarPersona() { // TODO: completarlo con fecha
 		ml.borrarTodo();
-		Persona persona = new Persona(10, "persona", "guardar", "murguiondo",
-				"Ramos", "descripcion", new LatLng(5.55, 5.01), "fecha");
+		Persona persona = PersonaTest.crearPersona();
 		ml.guardarPersona(persona);
 		Cursor c = ml.selectTodo();
 		c.moveToFirst();
 
-		assertEquals(10, c.getInt(c.getColumnIndex("id")));
-		assertEquals("persona", c.getString(c.getColumnIndex("nombre")));
-		assertEquals("guardar", c.getString(c.getColumnIndex("apellido")));
-		assertEquals("murguiondo", c.getString(c.getColumnIndex("direccion")));
-		assertEquals("Ramos", c.getString(c.getColumnIndex("zona")));
-		assertEquals("descripcion", c.getString(c.getColumnIndex("descripcion")));
-		assertEquals(5.55, c.getDouble(c.getColumnIndex("latitud")), 0.0000001);
-		assertEquals(5.01, c.getDouble(c.getColumnIndex("longitud")), 0.0000001);
+		assertEquals(persona.getId(), c.getInt(c.getColumnIndex("id")));
+		assertEquals(persona.getNombre(),
+				c.getString(c.getColumnIndex("nombre")));
+		assertEquals(persona.getApellido(),
+				c.getString(c.getColumnIndex("apellido")));
+		assertEquals(persona.getDireccion(),
+				c.getString(c.getColumnIndex("direccion")));
+		assertEquals(persona.getZona(), c.getString(c.getColumnIndex("zona")));
+		assertEquals(persona.getDescripcion(),
+				c.getString(c.getColumnIndex("descripcion")));
+		assertEquals(persona.getLatitud(), c.getDouble(c.getColumnIndex("latitud")), 0.0000001);
+		assertEquals(persona.getLongitud(), c.getDouble(c.getColumnIndex("longitud")), 0.0000001);
+		assertEquals(persona.getEstado(), c.getString(c.getColumnIndex("estado")));
 	}
 
 	public void testObtenerPersona() {
@@ -97,13 +104,40 @@ public class BDLocalTest extends AndroidTestCase {
 
 	public void testRegistrosIguales() {
 		ml.borrarTodo();
-		LatLng ubicacion = new LatLng(-10.0, -10.0);
-		Persona nuevaPersona = new Persona("Juan", "Perez", ubicacion);
+		Persona nuevaPersona = PersonaTest.crearPersona();
 		ml.guardarPersona(nuevaPersona);
 		ml.guardarPersona(nuevaPersona);
 
 		assertEquals(2, ml.selectTodo().getCount());
 	}
+	
+	public void testObtenerPersonasPorEstado() {
+		ml.borrarTodo();
+		Persona persona1 = PersonaTest.crearPersonaLatLngVariable();
+		persona1.setEstado(Utils.EST_NUEVO);
+		ml.guardarPersona(persona1);
+		Persona persona2 = PersonaTest.crearPersonaLatLngVariable();
+		persona2.setEstado(Utils.EST_ACTUALIZADO);
+		ml.guardarPersona(persona2);
+		Persona persona3 = PersonaTest.crearPersonaLatLngVariable();
+		persona3.setEstado(Utils.EST_BORRADO);
+		ml.guardarPersona(persona3);
+		Persona persona4 = PersonaTest.crearPersonaLatLngVariable();
+		persona4.setEstado(Utils.EST_NUEVO);
+		ml.guardarPersona(persona4);
+		Persona persona5 = PersonaTest.crearPersonaLatLngVariable();
+		persona5.setEstado(Utils.EST_MODIFICADO);
+		ml.guardarPersona(persona5);
+		
+		Personas resultadoNuevas = ml.obtenerPersonasNuevas();
+		Personas resultadoModificadas = ml.obtenerPersonasModificadas();
+		Personas resultadoBorradas = ml.obtenerPersonasBorradas();
+
+		assertEquals(2, resultadoNuevas.size());
+		assertEquals(1, resultadoModificadas.size());
+		assertEquals(1, resultadoBorradas.size());
+	}
+	
 
 	@Override
 	protected void tearDown() {
