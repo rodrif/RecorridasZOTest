@@ -27,4 +27,5 @@ public class BDWebTest extends AndroidTestCase{
 	public void borrar(){
 		manejador.borrar(personas);
 	}
+
 }

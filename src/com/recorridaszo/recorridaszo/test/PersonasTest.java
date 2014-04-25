@@ -1,7 +1,6 @@
 package com.recorridaszo.recorridaszo.test;
 
 import java.util.Iterator;
-
 import android.test.AndroidTestCase;
 import com.recorridaszo.persona.Persona;
 import com.recorridaszo.persona.Personas;
