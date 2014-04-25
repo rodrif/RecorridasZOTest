@@ -13,8 +13,8 @@ public class PersonaTest extends AndroidTestCase {
 	}
 
 	public static Persona crearPersona() {
-		Persona persona = new Persona(10, "persona", "guardar", "murguiondo",
-				"Ramos", "descripcion", new LatLng(5.55, 5.01), "fecha",
+		Persona persona = new Persona(10, "nom", "ap", "murguiondo",
+				"Ramos", "descripcion1", new LatLng(5.55, 5.01), "fecha",
 				"ACTUALIZADO");
 
 		return persona;
