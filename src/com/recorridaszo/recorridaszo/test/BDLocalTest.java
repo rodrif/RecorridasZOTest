@@ -21,37 +21,13 @@ public class BDLocalTest extends AndroidTestCase {
 		ml = ManejadorBDLocal.getInstance();
 	}
 
-	public void testInsercion() {
-		int id = 12;
-		String nombre = "PersonaPrueba";
-
-		// borro la bd local
-		ml.borrarTodo();
-
-		// Insertamos los datos en la tabla Usuarios
-		ml.getDB().execSQL(
-				"INSERT INTO Personas (id, nombre) " + "VALUES (" + id + ", '"
-						+ nombre + "')");
-
-		Cursor c = ml.selectTodo();
-		c.moveToFirst();
-		String valorNombre = c.getString(c.getColumnIndex("nombre"));
-		assertEquals("PersonaPrueba", valorNombre);
-	}
-
 	public void testBorrarTodo() {
-		int id = 1;
-		String nombre = "PersonaBorrar";
-
+		Persona persona = PersonaTest.crearPersona();
 		// borro la bd local
-		ml.borrarTodo();
-
-		ml.getDB().execSQL(
-				"INSERT INTO Personas (id, nombre) " + "VALUES (" + id + ", '"
-						+ nombre + "')");
-
+		ml.borrarTodo();		
+		ml.guardarPersona(persona);
+		
 		Cursor c = ml.selectTodo();
-
 		assertEquals(1, c.getCount());
 		// borro la bd local
 		ml.borrarTodo();

@@ -12,7 +12,7 @@ public class BDWebTest extends AndroidTestCase{
 	
 	public void testInsertar() {
 		Persona unaPersona = PersonaTest.crearPersona();
-		String resultado = manejador.insertar(unaPersona);
+		String resultado = manejador.insertar(unaPersona, null);
 		assertEquals("No inserto en DBWeb","1", resultado);
 	}	
 }
