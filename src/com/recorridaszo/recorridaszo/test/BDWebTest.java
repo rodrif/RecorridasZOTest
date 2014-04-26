@@ -19,6 +19,10 @@ public class BDWebTest extends AndroidTestCase{
 	
 	public void testInsertar() {		
 		String resultado = manejador.insertar(unaPersona, getContext());
+		try {Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 		assertEquals("No inserto en DBWeb","bien", resultado);
 	}
 	
