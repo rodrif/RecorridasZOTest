@@ -4,7 +4,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.recorridaszo.BDLocal.ManejadorBDLocal;
 import com.recorridaszo.persona.Persona;
 import com.recorridaszo.persona.Personas;
-import com.recorridaszo.recorridaszo.Utils;
+import com.recorridaszo.utilitarios.Utils;
 
 import android.database.Cursor;
 import android.test.AndroidTestCase;
@@ -84,7 +84,7 @@ public class BDLocalTest extends AndroidTestCase {
 		ml.guardarPersona(nuevaPersona);
 		ml.guardarPersona(nuevaPersona);
 
-		assertEquals(2, ml.selectTodo().getCount());
+		assertEquals(1, ml.selectTodo().getCount());
 	}
 	
 	public void testObtenerPersonasPorEstado() {

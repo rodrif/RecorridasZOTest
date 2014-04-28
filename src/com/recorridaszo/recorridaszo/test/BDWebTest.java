@@ -6,43 +6,62 @@ import com.google.android.gms.maps.model.LatLng;
 import com.recorridaszo.BDWeb.ManejadorBDWeb;
 import com.recorridaszo.persona.Persona;
 import com.recorridaszo.persona.Personas;
+import com.recorridaszo.recorridaszo.MapaActivity;
 
-public class BDWebTest extends AndroidTestCase{
+public class BDWebTest extends AndroidTestCase {
 	ManejadorBDWeb manejador = ManejadorBDWeb.getInstance();
 	Persona unaPersona = PersonaTest.crearPersona();
 	Personas personas = new Personas();
-	
+
 	@Override
 	protected void setUp() {
 		personas.addPersona(unaPersona);
 	}
-	
-	public void testInsertar() {		
-		String resultado = manejador.insertar(unaPersona, getContext());
-		try {Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-		assertEquals("No inserto en DBWeb","bien", resultado);
+
+	public void testInsertar() { // REVISAR		
+		String resultado = manejador.insertar(unaPersona, getContext(),
+				new MapaActivity());
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		assertEquals("No inserto en DBWeb", "bien", resultado);
 	}
-	
-	public void testBuscar() {
-		Persona personaBuscada = manejador.buscar(new LatLng(unaPersona.getLatitud(), 
-				unaPersona.getLongitud()));
-		
-		assertEquals(personaBuscada.getApellido(), unaPersona.getApellido());
-		assertEquals(personaBuscada.getDescripcion(), unaPersona.getDescripcion());
-		assertEquals(personaBuscada.getDireccion(), unaPersona.getDireccion());
-		assertEquals(personaBuscada.getEstado(), unaPersona.getEstado());
-		assertEquals(personaBuscada.getLatitud(), unaPersona.getLatitud());
-		assertEquals(personaBuscada.getLongitud(), unaPersona.getLongitud());
-		assertEquals(personaBuscada.getNombre(), unaPersona.getNombre());
-		assertEquals(personaBuscada.getZona(), unaPersona.getZona());
-		assertEquals(personaBuscada.getUltMod(), unaPersona.getUltMod());
+
+	public void testBuscar() { //TODO: no implementado en php
+		String resultado = manejador.insertar(unaPersona, getContext(),
+				new MapaActivity());
+		assertEquals("No inserto en DBWeb", "bien", resultado);
+		Persona personaBuscada = manejador.buscar(new LatLng(unaPersona
+				.getLatitud(), unaPersona.getLongitud()));
+
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		if (personaBuscada != null) {
+			assertEquals(personaBuscada.getApellido(), unaPersona.getApellido());
+			assertEquals(personaBuscada.getDescripcion(),
+					unaPersona.getDescripcion());
+			assertEquals(personaBuscada.getDireccion(),
+					unaPersona.getDireccion());
+			assertEquals(personaBuscada.getEstado(), unaPersona.getEstado());
+			assertEquals(personaBuscada.getLatitud(), unaPersona.getLatitud());
+			assertEquals(personaBuscada.getLongitud(), unaPersona.getLongitud());
+			assertEquals(personaBuscada.getNombre(), unaPersona.getNombre());
+			assertEquals(personaBuscada.getZona(), unaPersona.getZona());
+			assertEquals(personaBuscada.getUltMod(), unaPersona.getUltMod());
+		}
+		else {
+			fail("falló al buscar una persona en la BDWeb");
+		}
 	}
-	
-	public void borrar(){
-		manejador.borrar(personas);//TODO
+
+	public void borrar() {
+		manejador.borrar(personas);// TODO
 	}
 
 }

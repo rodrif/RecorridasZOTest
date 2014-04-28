@@ -33,13 +33,14 @@ public class PersonaTest extends AndroidTestCase {
 		Persona persona = PersonaTest.crearPersona();
 
 		assertEquals(10, persona.getId());
-		assertEquals("persona", persona.getNombre());
-		assertEquals("guardar", persona.getApellido());
+		assertEquals("nom", persona.getNombre());
+		assertEquals("ap", persona.getApellido());
 		assertEquals("murguiondo", persona.getDireccion());
 		assertEquals("Ramos", persona.getZona());
-		assertEquals("descripcion", persona.getDescripcion());
+		assertEquals("descripcion1", persona.getDescripcion());
 		assertEquals(5.55, persona.getLatitud());
 		assertEquals(5.01, persona.getLongitud());
+		assertEquals("fecha", persona.getUltMod());
 		assertEquals("ACTUALIZADO", persona.getEstado());
 	}
 
