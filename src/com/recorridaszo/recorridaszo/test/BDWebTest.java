@@ -55,8 +55,8 @@ public class BDWebTest extends AndroidTestCase {//TODO: hacer
 		}
 	}
 
-	public void borrar() {
-		manejador.borrar(personas);// TODO
+	public void Testborrar() {
+		manejador.borrarDBWEB();
 	}
 */
 }
