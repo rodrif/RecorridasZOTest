@@ -41,8 +41,9 @@ public class MapaActivityTest extends
 		this.getInstrumentation().waitForIdleSync();
 		mw.obtenerPersonasDBWeb(activity, null);		
 		this.getInstrumentation().waitForIdleSync();
-
-		c = ml.selectTodo();
+		c = ml.selectTodo();		
+		this.getInstrumentation().waitForIdleSync();
+		
 		assertEquals(1, c.getCount());
 	}
 
