@@ -1,10 +1,16 @@
 package com.recorridaszo.recorridaszo.integracion;
 
+import android.database.Cursor;
 import android.test.AndroidTestCase;
+
+import com.recorridaszo.BDLocal.ManejadorBDLocal;
+import com.recorridaszo.BDWeb.ManejadorBDWeb;
+import com.recorridaszo.persona.Persona;
+import com.recorridaszo.recorridaszo.test.PersonaTest;
 
 // TODO: ya realizada en mapa activity por temas de concurrencia
 public class DBWebDBLocalTest extends AndroidTestCase {
-/*	ManejadorBDWeb mw;
+	ManejadorBDWeb mw;
 	ManejadorBDLocal ml;
 	Persona unaPersona;
 	
@@ -48,5 +54,5 @@ public class DBWebDBLocalTest extends AndroidTestCase {
 		c = ml.selectTodo();
 		assertEquals(1, c.getCount());
 	}		
-	*/
+	
 }

@@ -37,9 +37,9 @@ public class MapaActivityTest extends
 		Cursor c = ml.selectTodo();
 		assertEquals(0, c.getCount());
 
-		mw.insertar(unaPersona, activity, null);
-		mw.obtenerPersonasDBWeb(activity, null);
-		
+		mw.insertar(unaPersona, activity, null);		
+		this.getInstrumentation().waitForIdleSync();
+		mw.obtenerPersonasDBWeb(activity, null);		
 		this.getInstrumentation().waitForIdleSync();
 
 		c = ml.selectTodo();

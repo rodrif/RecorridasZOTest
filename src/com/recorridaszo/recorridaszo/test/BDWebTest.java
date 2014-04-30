@@ -2,14 +2,9 @@ package com.recorridaszo.recorridaszo.test;
 
 import android.test.AndroidTestCase;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.recorridaszo.BDWeb.ManejadorBDWeb;
-import com.recorridaszo.persona.Persona;
-import com.recorridaszo.persona.Personas;
-import com.recorridaszo.recorridaszo.MapaActivity;
 
-public class BDWebTest extends AndroidTestCase {
-	ManejadorBDWeb manejador = ManejadorBDWeb.getInstance();
+public class BDWebTest extends AndroidTestCase {//TODO: hacer
+/*	ManejadorBDWeb manejador = ManejadorBDWeb.getInstance();
 	Persona unaPersona = PersonaTest.crearPersona();
 	Personas personas = new Personas();
 
@@ -28,8 +23,8 @@ public class BDWebTest extends AndroidTestCase {
 		}
 		assertEquals("No inserto en DBWeb", "bien", resultado);
 	}
-
-	public void testBuscar() { //TODO: no implementado en php
+*/
+/*	public void testBuscar() { //TODO: no implementado en php
 		String resultado = manejador.insertar(unaPersona, getContext(),
 				new MapaActivity());
 		assertEquals("No inserto en DBWeb", "bien", resultado);
@@ -63,5 +58,5 @@ public class BDWebTest extends AndroidTestCase {
 	public void borrar() {
 		manejador.borrar(personas);// TODO
 	}
-
+*/
 }

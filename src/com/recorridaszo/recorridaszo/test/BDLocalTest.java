@@ -53,6 +53,7 @@ public class BDLocalTest extends AndroidTestCase {
 		assertEquals(persona.getZona(), c.getString(c.getColumnIndex("zona")));
 		assertEquals(persona.getDescripcion(),
 				c.getString(c.getColumnIndex("descripcion")));
+		assertEquals(persona.getUltMod(), c.getString(c.getColumnIndex("ultMod")));
 		assertEquals(persona.getLatitud(), c.getDouble(c.getColumnIndex("latitud")), 0.0000001);
 		assertEquals(persona.getLongitud(), c.getDouble(c.getColumnIndex("longitud")), 0.0000001);
 		assertEquals(persona.getEstado(), c.getString(c.getColumnIndex("estado")));
