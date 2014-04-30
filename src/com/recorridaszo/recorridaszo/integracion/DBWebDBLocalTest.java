@@ -1,15 +1,10 @@
 package com.recorridaszo.recorridaszo.integracion;
 
-import com.recorridaszo.BDLocal.ManejadorBDLocal;
-import com.recorridaszo.BDWeb.ManejadorBDWeb;
-import com.recorridaszo.persona.Persona;
-import com.recorridaszo.recorridaszo.test.PersonaTest;
-
-import android.database.Cursor;
 import android.test.AndroidTestCase;
 
+// TODO: ya realizada en mapa activity por temas de concurrencia
 public class DBWebDBLocalTest extends AndroidTestCase {
-	ManejadorBDWeb mw;
+/*	ManejadorBDWeb mw;
 	ManejadorBDLocal ml;
 	Persona unaPersona;
 	
@@ -43,7 +38,7 @@ public class DBWebDBLocalTest extends AndroidTestCase {
 		
 		mw.insertar(unaPersona, getContext(), null);
 		mw.obtenerPersonasDBWeb(getContext(), null);
-		
+
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -53,5 +48,5 @@ public class DBWebDBLocalTest extends AndroidTestCase {
 		c = ml.selectTodo();
 		assertEquals(1, c.getCount());
 	}		
-	
+	*/
 }

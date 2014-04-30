@@ -49,11 +49,7 @@ public class ActivityFormularioTest extends
 			}
 		});		
 
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		this.getInstrumentation().waitForIdleSync();
 		
 		Cursor c = ml.selectTodo();
 		Persona persona = ml.obtenerPersona(ubicacion);
