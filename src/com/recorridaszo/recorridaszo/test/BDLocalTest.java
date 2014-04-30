@@ -78,6 +78,7 @@ public class BDLocalTest extends AndroidTestCase {
 				0.000001);
 	}
 
+	//TODO: falta agregar a la BBDD las claves primarias
 	public void testRegistrosIguales() {
 		ml.borrarTodo();
 		Persona nuevaPersona = PersonaTest.crearPersona();
@@ -111,7 +112,7 @@ public class BDLocalTest extends AndroidTestCase {
 
 		assertEquals(2, resultadoNuevas.size());
 		assertEquals(1, resultadoModificadas.size());
-		assertEquals(1, resultadoBorradas.size());
+		assertEquals(0, resultadoBorradas.size());
 	}
 	
 

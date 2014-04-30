@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.recorridaszo.persona.Persona;
+import com.recorridaszo.utilitarios.Utils;
 
 import android.test.AndroidTestCase;
 
@@ -13,9 +14,9 @@ public class PersonaTest extends AndroidTestCase {
 	}
 
 	public static Persona crearPersona() {
-		Persona persona = new Persona(10, "nom", "ap", "murguiondo",
-				"Ramos", "descripcion1", new LatLng(5.55, 5.01), "fecha",
-				"ACTUALIZADO");
+		Persona persona = new Persona(10, "nom", "ap", "murguiondo", "Ramos",
+				"descripcion1", new LatLng(5.55, 5.01), Utils.getDateTime(),
+				Utils.EST_NUEVO);
 
 		return persona;
 	}
@@ -29,7 +30,7 @@ public class PersonaTest extends AndroidTestCase {
 		return persona;
 	}
 
-	public void testCrearPersona() {
+	public void testCrearPersona() {//TODO falta fecha
 		Persona persona = PersonaTest.crearPersona();
 
 		assertEquals(10, persona.getId());
@@ -40,8 +41,7 @@ public class PersonaTest extends AndroidTestCase {
 		assertEquals("descripcion1", persona.getDescripcion());
 		assertEquals(5.55, persona.getLatitud());
 		assertEquals(5.01, persona.getLongitud());
-		assertEquals("fecha", persona.getUltMod());
-		assertEquals("ACTUALIZADO", persona.getEstado());
+		assertEquals(Utils.EST_NUEVO, persona.getEstado());
 	}
 
 }
