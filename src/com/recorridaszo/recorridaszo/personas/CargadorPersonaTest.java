@@ -1,4 +1,4 @@
-package com.recorridaszo.recorridaszo.test;
+package com.recorridaszo.recorridaszo.personas;
 
 import android.content.ContentValues;
 import android.test.AndroidTestCase;

@@ -1,11 +1,12 @@
 package com.recorridaszo.recorridaszo.test;
-
+/* TODO: rehacer cuando este el mock de manejador bd web
 import android.database.Cursor;
 import android.test.ActivityInstrumentationTestCase2;
 import com.recorridaszo.BDLocal.ManejadorBDLocal;
 import com.recorridaszo.BDWeb.ManejadorBDWeb;
 import com.recorridaszo.persona.Persona;
 import com.recorridaszo.recorridaszo.MapaActivity;
+import com.recorridaszo.recorridaszo.personas.PersonaTest;
 
 public class MapaActivityTest extends
 		ActivityInstrumentationTestCase2<MapaActivity> {
@@ -47,4 +48,4 @@ public class MapaActivityTest extends
 		assertEquals(1, c.getCount());
 	}
 
-}
+}*/

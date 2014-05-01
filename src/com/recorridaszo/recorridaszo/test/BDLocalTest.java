@@ -4,6 +4,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.recorridaszo.BDLocal.ManejadorBDLocal;
 import com.recorridaszo.persona.Persona;
 import com.recorridaszo.persona.Personas;
+import com.recorridaszo.recorridaszo.personas.PersonaTest;
 import com.recorridaszo.utilitarios.Utils;
 
 import android.database.Cursor;
@@ -114,6 +115,25 @@ public class BDLocalTest extends AndroidTestCase {
 		assertEquals(2, resultadoNuevas.size());
 		assertEquals(1, resultadoModificadas.size());
 		assertEquals(0, resultadoBorradas.size());
+	}
+	
+	public void testEliminarPersonasActualizadas() {
+		ml.borrarTodo();
+		Persona persona1 = PersonaTest.crearPersonaLatLngVariable();
+		persona1.setEstado(Utils.EST_NUEVO);
+		ml.guardarPersona(persona1);
+		Persona persona2 = PersonaTest.crearPersonaLatLngVariable();
+		persona2.setEstado(Utils.EST_ACTUALIZADO);
+		ml.guardarPersona(persona2);
+		Persona persona5 = PersonaTest.crearPersonaLatLngVariable();
+		persona5.setEstado(Utils.EST_MODIFICADO);
+		ml.guardarPersona(persona5);
+		
+		ml.eliminarPersonasActualizadas();
+		
+		Cursor c = ml.selectTodo();
+		
+		assertEquals(2, c.getCount());
 	}
 	
 

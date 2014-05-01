@@ -1,4 +1,4 @@
-package com.recorridaszo.recorridaszo.test;
+package com.recorridaszo.recorridaszo.personas;
 
 import java.util.Random;
 
@@ -15,7 +15,7 @@ public class PersonaTest extends AndroidTestCase {
 
 	public static Persona crearPersona() {
 		Persona persona = new Persona(10, "nom", "ap", "murguiondo", "Ramos",
-				"descripcion1", new LatLng(5.55, 5.01), Utils.getDateTime(),
+				"descripcion1", new LatLng(-34.61509026099774, -58.42213869094848), Utils.getDateTime(),
 				Utils.EST_NUEVO);
 
 		return persona;
@@ -39,8 +39,8 @@ public class PersonaTest extends AndroidTestCase {
 		assertEquals("murguiondo", persona.getDireccion());
 		assertEquals("Ramos", persona.getZona());
 		assertEquals("descripcion1", persona.getDescripcion());
-		assertEquals(5.55, persona.getLatitud());
-		assertEquals(5.01, persona.getLongitud());
+		assertEquals(-34.61509026099774, persona.getLatitud());
+		assertEquals(-58.42213869094848, persona.getLongitud());
 		assertEquals(Utils.EST_NUEVO, persona.getEstado());
 	}
 

@@ -6,7 +6,7 @@ import android.test.AndroidTestCase;
 import com.recorridaszo.BDLocal.ManejadorBDLocal;
 import com.recorridaszo.BDWeb.ManejadorBDWeb;
 import com.recorridaszo.persona.Persona;
-import com.recorridaszo.recorridaszo.test.PersonaTest;
+import com.recorridaszo.recorridaszo.personas.PersonaTest;
 
 // TODO: ya realizada en mapa activity por temas de concurrencia
 public class DBWebDBLocalTest extends AndroidTestCase {
@@ -34,7 +34,7 @@ public class DBWebDBLocalTest extends AndroidTestCase {
 		ml.borrarTodo();
 		
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -44,7 +44,7 @@ public class DBWebDBLocalTest extends AndroidTestCase {
 		
 		mw.insertar(unaPersona, getContext(), null);
 		mw.obtenerPersonasDBWeb(getContext(), null);
-
+		
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {

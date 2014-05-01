@@ -1,4 +1,4 @@
-package com.recorridaszo.recorridaszo.test;
+package com.recorridaszo.recorridaszo.personas;
 
 import java.util.Iterator;
 import android.test.AndroidTestCase;
