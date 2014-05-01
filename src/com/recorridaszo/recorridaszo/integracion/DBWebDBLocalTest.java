@@ -1,11 +1,14 @@
 package com.recorridaszo.recorridaszo.integracion;
 
+import android.app.Instrumentation;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.test.AndroidTestCase;
 
 import com.recorridaszo.BDLocal.ManejadorBDLocal;
 import com.recorridaszo.BDWeb.ManejadorBDWeb;
 import com.recorridaszo.persona.Persona;
+import com.recorridaszo.recorridaszo.MapaActivity;
 import com.recorridaszo.recorridaszo.personas.PersonaTest;
 
 // TODO: ya realizada en mapa activity por temas de concurrencia
