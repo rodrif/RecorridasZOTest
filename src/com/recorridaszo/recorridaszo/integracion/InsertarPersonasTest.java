@@ -1,14 +1,9 @@
 package com.recorridaszo.recorridaszo.integracion;
 
 import java.util.Iterator;
-
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.AndroidTestCase;
-
 import com.recorridaszo.BDLocal.ManejadorBDLocal;
 import com.recorridaszo.BDWeb.ManejadorBDWeb;
-import com.recorridaszo.interfaces.ActualizablePersonas;
-import com.recorridaszo.interfaces.IManejadorBDWeb;
 import com.recorridaszo.persona.Persona;
 import com.recorridaszo.persona.Personas;
 import com.recorridaszo.recorridaszo.MapaActivity;
@@ -19,7 +14,6 @@ public class InsertarPersonasTest extends ActivityInstrumentationTestCase2<MapaA
 	private MapaActivity activity;
 	private Personas personas;
 	private ManejadorBDLocal ml = ManejadorBDLocal.getInstance();	
-	private IManejadorBDWeb mw = ManejadorBDWeb.getInstance();
 	private Persona persona1;
 	private Persona persona2;
 	
@@ -28,8 +22,8 @@ public class InsertarPersonasTest extends ActivityInstrumentationTestCase2<MapaA
 	}
 	
 	protected void setUp() {
-		activity = getActivity(); // get a references to the app under test
 		ManejadorBDWeb.setMock(true);
+		activity = getActivity(); // get a references to the app under test
 		persona1 = PersonaTest.crearPersonaLatLngVariable();
 		persona1.setId(10);
 		persona1.setEstado(Utils.EST_NUEVO);
@@ -42,6 +36,8 @@ public class InsertarPersonasTest extends ActivityInstrumentationTestCase2<MapaA
 		ml.conectarse(activity);
 		ml.borrarTodo();
 		ml.guardarPersonas(personas);
+		
+		this.getInstrumentation().waitForIdleSync();
 	}
 	
 	public void testInsertarPersonas(){
@@ -53,11 +49,6 @@ public class InsertarPersonasTest extends ActivityInstrumentationTestCase2<MapaA
 
 		this.getInstrumentation().waitForIdleSync();		
 		
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		Personas resultado = ml.obtenerPersonas();
 		Iterator<Persona> it = resultado.iterator();
 		
