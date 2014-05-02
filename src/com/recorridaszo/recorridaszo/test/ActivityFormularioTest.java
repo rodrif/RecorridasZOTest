@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import com.google.android.gms.maps.model.LatLng;
 import com.recorridaszo.BDLocal.ManejadorBDLocal;
+import com.recorridaszo.BDWeb.ManejadorBDWeb;
 import com.recorridaszo.persona.Persona;
 import com.recorridaszo.recorridaszo.FormularioActivity;
 import com.recorridaszo.utilitarios.Utils;
@@ -58,4 +59,10 @@ public class ActivityFormularioTest extends
 		assertEquals(1, c.getCount());
 		assertEquals("Juan", persona.getNombre());
 	}	
+	
+	@Override
+	protected void tearDown() {
+		ManejadorBDWeb.setMock(false);
+		ml.desconectarse();
+	}
 }

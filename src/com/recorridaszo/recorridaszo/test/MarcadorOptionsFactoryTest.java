@@ -1,10 +1,8 @@
 package com.recorridaszo.recorridaszo.test;
 
-import android.test.AndroidTestCase;
-import com.google.android.gms.maps.MapsInitializer;
-
+/*
 public class MarcadorOptionsFactoryTest extends AndroidTestCase {
-
+/*
 	public MarcadorOptionsFactoryTest() {
 
 	}
@@ -34,4 +32,4 @@ public class MarcadorOptionsFactoryTest extends AndroidTestCase {
 	 * assertEquals(BitmapDescriptorFactory.HUE_RED, //
 	 * markerOptions4.getIcon()); }
 	 */
-}
+

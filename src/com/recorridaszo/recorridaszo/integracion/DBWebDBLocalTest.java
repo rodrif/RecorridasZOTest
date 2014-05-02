@@ -17,9 +17,7 @@ public class DBWebDBLocalTest extends AndroidTestCase {
 	
 	
 	public DBWebDBLocalTest() {
-		mw = ManejadorBDWeb.getInstance();
-		ml = ManejadorBDLocal.getInstance();
-		unaPersona = PersonaTest.crearPersona();	
+		ManejadorBDWeb.setMock(false);
 	}
 
 	@Override
@@ -56,6 +54,11 @@ public class DBWebDBLocalTest extends AndroidTestCase {
 		
 		c = ml.selectTodo();
 		assertEquals(1, c.getCount());
-	}		
+	}
+	
+	@Override
+	protected void tearDown() {
+		ml.desconectarse();
+	}
 	
 }

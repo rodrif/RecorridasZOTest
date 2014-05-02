@@ -139,7 +139,6 @@ public class BDLocalTest extends AndroidTestCase {
 
 	@Override
 	protected void tearDown() {
-		// Cerramos la base de datos
 		ml.desconectarse();
 	}
 }

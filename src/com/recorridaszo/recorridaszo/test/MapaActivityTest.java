@@ -51,6 +51,7 @@ public class MapaActivityTest extends
 
 	@Override
 	protected void tearDown() {
-		ManejadorBDWeb.setMock(false);	
+		ManejadorBDWeb.setMock(false);
+		ml.desconectarse();
 	}
 }

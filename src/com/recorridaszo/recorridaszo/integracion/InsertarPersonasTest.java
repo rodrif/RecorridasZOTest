@@ -59,6 +59,7 @@ public class InsertarPersonasTest extends ActivityInstrumentationTestCase2<MapaA
 
 	@Override
 	protected void tearDown() {
-		ManejadorBDWeb.setMock(false);	
+		ManejadorBDWeb.setMock(false);
+		ml.desconectarse();
 	}
 }
