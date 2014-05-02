@@ -1,6 +1,8 @@
 package com.recorridaszo.recorridaszo.test;
 
 import android.test.AndroidTestCase;
+
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.MapsInitializer;
 
 
@@ -12,7 +14,12 @@ public class MarcadorOptionsFactoryTest extends AndroidTestCase {
 
 	@Override
 	protected void setUp() {
-		MapsInitializer.initialize(getContext());
+		try {
+			MapsInitializer.initialize(getContext());
+		} catch (GooglePlayServicesNotAvailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 /*	public void testCrearOpciones() {// TODO: arreglar

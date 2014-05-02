@@ -6,6 +6,7 @@ import com.recorridaszo.BDLocal.ManejadorBDLocal;
 import com.recorridaszo.BDWeb.ManejadorBDWeb;
 import com.recorridaszo.interfaces.IManejadorBDWeb;
 import com.recorridaszo.persona.Persona;
+import com.recorridaszo.persona.Personas;
 import com.recorridaszo.recorridaszo.MapaActivity;
 import com.recorridaszo.recorridaszo.personas.PersonaTest;
 
@@ -32,13 +33,15 @@ public class MapaActivityTest extends
 	}
 
 	public void testInsercionDBWeb() {
+		Personas personas = new Personas();
 		mw.borrarDBWEB();
 		ml.borrarTodo();
 
 		Cursor c = ml.selectTodo();
 		assertEquals(0, c.getCount());
 
-		mw.insertar(unaPersona, activity, null);		
+		personas.addPersona(unaPersona);
+		mw.insertar(personas, activity, null);		
 		mw.obtenerPersonasDBWeb(activity, null);		
 
 		c = ml.selectTodo();		

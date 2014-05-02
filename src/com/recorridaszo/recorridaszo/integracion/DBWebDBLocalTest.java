@@ -6,6 +6,7 @@ import com.recorridaszo.BDLocal.ManejadorBDLocal;
 import com.recorridaszo.BDWeb.ManejadorBDWeb;
 import com.recorridaszo.interfaces.IManejadorBDWeb;
 import com.recorridaszo.persona.Persona;
+import com.recorridaszo.persona.Personas;
 import com.recorridaszo.recorridaszo.personas.PersonaTest;
 
 
@@ -30,11 +31,12 @@ public class DBWebDBLocalTest extends AndroidTestCase {
 	}
 
 	public void testInsercionDBWeb() {
+		Personas personas = new Personas();
 		mw.borrarDBWEB();
 		ml.borrarTodo();
 		
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(7000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -42,11 +44,12 @@ public class DBWebDBLocalTest extends AndroidTestCase {
 		Cursor c = ml.selectTodo();
 		assertEquals(0, c.getCount());
 		
-		mw.insertar(unaPersona, getContext(), null);
+		personas.addPersona(unaPersona);
+		mw.insertar(personas, getContext(), null);
 		mw.obtenerPersonasDBWeb(getContext(), null);
 		
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(7000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
