@@ -1,9 +1,10 @@
 package com.recorridaszo.recorridaszo.test;
-/* TODO: rehacer cuando este el mock de manejador bd web
+// TODO: rehacer cuando este el mock de manejador bd web
 import android.database.Cursor;
 import android.test.ActivityInstrumentationTestCase2;
 import com.recorridaszo.BDLocal.ManejadorBDLocal;
 import com.recorridaszo.BDWeb.ManejadorBDWeb;
+import com.recorridaszo.interfaces.IManejadorBDWeb;
 import com.recorridaszo.persona.Persona;
 import com.recorridaszo.recorridaszo.MapaActivity;
 import com.recorridaszo.recorridaszo.personas.PersonaTest;
@@ -11,7 +12,7 @@ import com.recorridaszo.recorridaszo.personas.PersonaTest;
 public class MapaActivityTest extends
 		ActivityInstrumentationTestCase2<MapaActivity> {
 
-	private ManejadorBDWeb mw;
+	private IManejadorBDWeb mw;
 	private ManejadorBDLocal ml;
 	private Persona unaPersona;
 	private MapaActivity activity;
@@ -22,6 +23,7 @@ public class MapaActivityTest extends
 
 	@Override
 	protected void setUp() {
+		ManejadorBDWeb.setMock(true);
 		mw = ManejadorBDWeb.getInstance();
 		ml = ManejadorBDLocal.getInstance();
 		unaPersona = PersonaTest.crearPersona();
@@ -33,19 +35,19 @@ public class MapaActivityTest extends
 		mw.borrarDBWEB();
 		ml.borrarTodo();
 
-		this.getInstrumentation().waitForIdleSync();
-
 		Cursor c = ml.selectTodo();
 		assertEquals(0, c.getCount());
 
 		mw.insertar(unaPersona, activity, null);		
-		this.getInstrumentation().waitForIdleSync();
 		mw.obtenerPersonasDBWeb(activity, null);		
-		this.getInstrumentation().waitForIdleSync();
+
 		c = ml.selectTodo();		
-		this.getInstrumentation().waitForIdleSync();
 		
 		assertEquals(1, c.getCount());
 	}
 
-}*/
+	@Override
+	protected void tearDown() {
+		ManejadorBDWeb.setMock(false);	
+	}
+}
