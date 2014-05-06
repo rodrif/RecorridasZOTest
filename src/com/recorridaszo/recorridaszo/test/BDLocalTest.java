@@ -9,6 +9,7 @@ import com.recorridaszo.utilitarios.Utils;
 
 import android.database.Cursor;
 import android.test.AndroidTestCase;
+import android.util.Log;
 
 public class BDLocalTest extends AndroidTestCase {
 	ManejadorBDLocal ml;
@@ -25,9 +26,9 @@ public class BDLocalTest extends AndroidTestCase {
 	public void testBorrarTodo() {
 		Persona persona = PersonaTest.crearPersona();
 		// borro la bd local
-		ml.borrarTodo();		
+		ml.borrarTodo();
 		ml.guardarPersona(persona);
-		
+
 		Cursor c = ml.selectTodo();
 		assertEquals(1, c.getCount());
 		// borro la bd local
@@ -37,27 +38,26 @@ public class BDLocalTest extends AndroidTestCase {
 		assertEquals(0, c.getCount());
 	}
 
-	public void testGuardarPersona() { // TODO: completarlo con fecha
+	public void testGuardarPersona() {
 		ml.borrarTodo();
 		Persona persona = PersonaTest.crearPersona();
+		String fecha = Utils.getDateTime();
+		persona.setUltMod(fecha);
 		ml.guardarPersona(persona);
-		Cursor c = ml.selectTodo();
-		c.moveToFirst();
 
-		assertEquals(persona.getId(), c.getInt(c.getColumnIndex("id")));
-		assertEquals(persona.getNombre(),
-				c.getString(c.getColumnIndex("nombre")));
-		assertEquals(persona.getApellido(),
-				c.getString(c.getColumnIndex("apellido")));
-		assertEquals(persona.getDireccion(),
-				c.getString(c.getColumnIndex("direccion")));
-		assertEquals(persona.getZona(), c.getString(c.getColumnIndex("zona")));
-		assertEquals(persona.getDescripcion(),
-				c.getString(c.getColumnIndex("descripcion")));
-		assertEquals(persona.getUltMod(), c.getString(c.getColumnIndex("ultMod")));
-		assertEquals(persona.getLatitud(), c.getDouble(c.getColumnIndex("latitud")), 0.0000001);
-		assertEquals(persona.getLongitud(), c.getDouble(c.getColumnIndex("longitud")), 0.0000001);
-		assertEquals(persona.getEstado(), c.getString(c.getColumnIndex("estado")));
+		Persona personaEnBD = ml.obtenerPersona(persona.getUbicacion());
+
+		assertEquals(persona.getId(), personaEnBD.getId());
+		assertEquals(persona.getNombre(), personaEnBD.getNombre());
+		assertEquals(persona.getApellido(), personaEnBD.getApellido());
+		assertEquals(persona.getDireccion(), personaEnBD.getDireccion());
+		assertEquals(persona.getZona(), personaEnBD.getZona());
+		assertEquals(persona.getDescripcion(), personaEnBD.getDescripcion());
+		assertEquals(persona.getLatitud(), personaEnBD.getLatitud(), 0.0000001);
+		assertEquals(persona.getLongitud(), personaEnBD.getLongitud(),
+				0.0000001);
+		assertEquals(persona.getEstado(), personaEnBD.getEstado());
+		assertEquals(fecha, personaEnBD.getUltMod());
 	}
 
 	public void testObtenerPersona() {
@@ -80,7 +80,6 @@ public class BDLocalTest extends AndroidTestCase {
 				0.000001);
 	}
 
-	//TODO: falta agregar a la BBDD las claves primarias
 	public void testRegistrosIguales() {
 		ml.borrarTodo();
 		Persona nuevaPersona = PersonaTest.crearPersona();
@@ -89,7 +88,7 @@ public class BDLocalTest extends AndroidTestCase {
 
 		assertEquals(1, ml.selectTodo().getCount());
 	}
-	
+
 	public void testObtenerPersonasPorEstado() {
 		ml.borrarTodo();
 		Persona persona1 = PersonaTest.crearPersonaLatLngVariable();
@@ -107,7 +106,7 @@ public class BDLocalTest extends AndroidTestCase {
 		Persona persona5 = PersonaTest.crearPersonaLatLngVariable();
 		persona5.setEstado(Utils.EST_MODIFICADO);
 		ml.guardarPersona(persona5);
-		
+
 		Personas resultadoNuevas = ml.obtenerPersonasNuevas();
 		Personas resultadoModificadas = ml.obtenerPersonasModificadas();
 		Personas resultadoBorradas = ml.obtenerPersonasBorradas();
@@ -116,7 +115,7 @@ public class BDLocalTest extends AndroidTestCase {
 		assertEquals(1, resultadoModificadas.size());
 		assertEquals(0, resultadoBorradas.size());
 	}
-	
+
 	public void testEliminarPersonasActualizadas() {
 		ml.borrarTodo();
 		Persona persona1 = PersonaTest.crearPersonaLatLngVariable();
@@ -128,14 +127,30 @@ public class BDLocalTest extends AndroidTestCase {
 		Persona persona5 = PersonaTest.crearPersonaLatLngVariable();
 		persona5.setEstado(Utils.EST_MODIFICADO);
 		ml.guardarPersona(persona5);
-		
+
 		ml.eliminarPersonasActualizadas();
-		
+
 		Cursor c = ml.selectTodo();
-		
+
 		assertEquals(2, c.getCount());
 	}
 	
+	public void testGetUltFechaMod() {
+		ml.borrarTodo();
+		Persona persona1 = PersonaTest.crearPersonaLatLngVariable();		
+		Persona persona2 = PersonaTest.crearPersonaLatLngVariable();
+		Persona persona3 = PersonaTest.crearPersonaLatLngVariable();
+		
+		persona1.setUltMod("2010-05-06T16:10:41-0300");
+		persona2.setUltMod("2014-01-06T16:10:41-0300");
+		persona3.setUltMod("2014-05-06T16:10:41-0300");
+		
+		ml.guardarPersona(persona3);
+		ml.guardarPersona(persona1);
+		ml.guardarPersona(persona2);
+		
+		assertEquals(persona3.getUltMod(), ml.getUltFechaMod());
+	}
 
 	@Override
 	protected void tearDown() {
