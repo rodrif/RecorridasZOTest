@@ -6,10 +6,9 @@ import com.recorridaszo.persona.Persona;
 import com.recorridaszo.persona.Personas;
 import com.recorridaszo.recorridaszo.personas.PersonaTest;
 import com.recorridaszo.utilitarios.Utils;
-
 import android.database.Cursor;
 import android.test.AndroidTestCase;
-import android.util.Log;
+
 
 public class BDLocalTest extends AndroidTestCase {
 	ManejadorBDLocal ml;
@@ -150,6 +149,12 @@ public class BDLocalTest extends AndroidTestCase {
 		ml.guardarPersona(persona2);
 		
 		assertEquals(persona3.getUltMod(), ml.getUltFechaMod());
+	}
+	
+	public void testUltFechaModFechaCero() {
+		ml.borrarTodo();
+		
+		assertEquals(Utils.FECHA_CERO, ml.getUltFechaMod());
 	}
 
 	@Override
