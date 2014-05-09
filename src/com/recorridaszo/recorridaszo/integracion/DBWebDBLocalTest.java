@@ -1,11 +1,11 @@
 package com.recorridaszo.recorridaszo.integracion;
 
-import android.database.Cursor;
 import android.test.AndroidTestCase;
 import com.recorridaszo.BDLocal.ManejadorBDLocal;
 import com.recorridaszo.BDWeb.ManejadorBDWeb;
 import com.recorridaszo.interfaces.IManejadorBDWeb;
 import com.recorridaszo.persona.Persona;
+import com.recorridaszo.persona.Personas;
 import com.recorridaszo.recorridaszo.personas.PersonaTest;
 
 
@@ -39,8 +39,8 @@ public class DBWebDBLocalTest extends AndroidTestCase {
 			e.printStackTrace();
 		}
 		
-		Cursor c = ml.selectTodo();
-		assertEquals(0, c.getCount());
+		Personas p = ml.selectTodoPersonas();
+		assertEquals(0, p.size());
 		
 		mw.insertar(unaPersona, getContext(), null);
 		mw.obtenerPersonasDBWeb(getContext(), null);
@@ -51,8 +51,7 @@ public class DBWebDBLocalTest extends AndroidTestCase {
 			e.printStackTrace();
 		}
 		
-		c = ml.selectTodo();
-		assertEquals(1, c.getCount());
-	}		
-	
+		p = ml.selectTodoPersonas();
+		assertEquals(1, p.size());
+	}	
 }

@@ -6,7 +6,6 @@ import com.recorridaszo.persona.Persona;
 import com.recorridaszo.persona.Personas;
 import com.recorridaszo.recorridaszo.personas.PersonaTest;
 import com.recorridaszo.utilitarios.Utils;
-import android.database.Cursor;
 import android.test.AndroidTestCase;
 import android.util.Log;
 
@@ -28,13 +27,13 @@ public class BDLocalTest extends AndroidTestCase {
 		ml.borrarTodo();
 		ml.guardarPersona(persona);
 
-		Cursor c = ml.selectTodo();
-		assertEquals(1, c.getCount());
+		Personas p = ml.selectTodoPersonas();
+		assertEquals(1, p.size());
 		// borro la bd local
 		ml.borrarTodo();
 
-		c = ml.selectTodo();
-		assertEquals(0, c.getCount());
+		p = ml.selectTodoPersonas();
+		assertEquals(0, p.size());
 	}
 
 	public void testGuardarPersona() {
@@ -85,7 +84,7 @@ public class BDLocalTest extends AndroidTestCase {
 		ml.guardarPersona(nuevaPersona);
 		ml.guardarPersona(nuevaPersona);
 
-		assertEquals(1, ml.selectTodo().getCount());
+		assertEquals(1, ml.selectTodoPersonas().size());
 	}
 
 	public void testObtenerPersonasPorEstado() {
@@ -129,9 +128,9 @@ public class BDLocalTest extends AndroidTestCase {
 
 		ml.eliminarPersonasActualizadas();
 
-		Cursor c = ml.selectTodo();
+		Personas p = ml.selectTodoPersonas();
 
-		assertEquals(2, c.getCount());
+		assertEquals(2, p.size());
 	}
 
 	public void testGetUltFechaMod() {
@@ -189,6 +188,51 @@ public class BDLocalTest extends AndroidTestCase {
 		Log.e(Utils.APPTAG, "nuevaUbicacion " + nuevaUbicacion.longitude);
 		assertEquals(personaProblematica.getNombre(),
 				personaEncontrada.getNombre());
+	}
+
+	public void testEliminarPersona() {
+		ml.borrarTodo();
+		Persona persona = PersonaTest.crearPersonaLatLngVariable();
+		ml.guardarPersona(persona);
+
+		Persona pEliminar = PersonaTest.crearPersonaLatLngVariable();
+		LatLng ubicacionParecida = new LatLng(persona.getLatitud()
+				+ Utils.PRECISION, persona.getLongitud() - Utils.PRECISION);
+		pEliminar.setUbicacion(ubicacionParecida);
+
+		ml.eliminarPersona(pEliminar.getUbicacion());
+		Personas p = ml.selectTodoPersonas();
+
+		assertEquals(1, p.size());
+	}
+
+	public void testEliminarPersonaInex() {
+		ml.borrarTodo();
+		int res = ml.eliminarPersona(new LatLng(-5.0, -5.0));
+
+		assertEquals(-1, res);
+	}
+
+	public void testInsertarPersona() {
+		ml.borrarTodo();
+		Persona persona = PersonaTest.crearPersonaLatLngVariable();
+		ml.guardarPersona(persona);
+
+		assertEquals(1, ml.selectTodoPersonas().size());
+	}
+	
+	public void testInsertarPersonaDistinta() {
+		ml.borrarTodo();
+		Persona persona = PersonaTest.crearPersonaLatLngVariable();
+		ml.guardarPersona(persona);
+		
+		LatLng ubicacionParecida = new LatLng(persona.getLatitud()
+				+ 2 * Utils.PRECISION, persona.getLongitud());
+		persona.setUbicacion(ubicacionParecida);
+		
+		ml.guardarPersona(persona);
+
+		assertEquals(2, ml.selectTodoPersonas().size());
 	}
 
 	@Override

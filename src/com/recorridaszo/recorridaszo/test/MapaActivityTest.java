@@ -1,11 +1,11 @@
 package com.recorridaszo.recorridaszo.test;
-// TODO: rehacer cuando este el mock de manejador bd web
-import android.database.Cursor;
+
 import android.test.ActivityInstrumentationTestCase2;
 import com.recorridaszo.BDLocal.ManejadorBDLocal;
 import com.recorridaszo.BDWeb.ManejadorBDWeb;
 import com.recorridaszo.interfaces.IManejadorBDWeb;
 import com.recorridaszo.persona.Persona;
+import com.recorridaszo.persona.Personas;
 import com.recorridaszo.recorridaszo.MapaActivity;
 import com.recorridaszo.recorridaszo.personas.PersonaTest;
 
@@ -35,15 +35,15 @@ public class MapaActivityTest extends
 		mw.borrarDBWEB();
 		ml.borrarTodo();
 
-		Cursor c = ml.selectTodo();
-		assertEquals(0, c.getCount());
+		Personas p = ml.selectTodoPersonas();
+		assertEquals(0, p.size());
 
 		mw.insertar(unaPersona, activity, null);		
 		mw.obtenerPersonasDBWeb(activity, null);		
 
-		c = ml.selectTodo();		
+		p = ml.selectTodoPersonas();		
 		
-		assertEquals(1, c.getCount());
+		assertEquals(1, p.size());
 	}
 
 	@Override

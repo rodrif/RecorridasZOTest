@@ -30,7 +30,8 @@ public class PersonaTest extends AndroidTestCase {
 		return persona;
 	}
 
-	public void testCrearPersona() {//TODO falta fecha
+	public void testCrearPersona() {
+		String fecha = Utils.getDateTime();
 		Persona persona = PersonaTest.crearPersona();
 
 		assertEquals(10, persona.getId());
@@ -42,6 +43,7 @@ public class PersonaTest extends AndroidTestCase {
 		assertEquals(-34.61509026099774, persona.getLatitud());
 		assertEquals(-58.42213869094848, persona.getLongitud());
 		assertEquals(Utils.EST_NUEVO, persona.getEstado());
+		assertEquals(fecha, persona.getUltMod());
 	}
 
 }
