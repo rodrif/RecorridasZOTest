@@ -8,7 +8,7 @@ import com.recorridaszo.recorridaszo.personas.PersonaTest;
 import com.recorridaszo.utilitarios.Utils;
 import android.database.Cursor;
 import android.test.AndroidTestCase;
-
+import android.util.Log;
 
 public class BDLocalTest extends AndroidTestCase {
 	ManejadorBDLocal ml;
@@ -133,56 +133,62 @@ public class BDLocalTest extends AndroidTestCase {
 
 		assertEquals(2, c.getCount());
 	}
-	
+
 	public void testGetUltFechaMod() {
 		ml.borrarTodo();
-		Persona persona1 = PersonaTest.crearPersonaLatLngVariable();		
+		Persona persona1 = PersonaTest.crearPersonaLatLngVariable();
 		Persona persona2 = PersonaTest.crearPersonaLatLngVariable();
 		Persona persona3 = PersonaTest.crearPersonaLatLngVariable();
-		
+
 		persona1.setUltMod("2010-05-06T16:10:41-0300");
 		persona2.setUltMod("2014-01-06T16:10:41-0300");
 		persona3.setUltMod("2014-05-06T16:10:41-0300");
-		
+
 		ml.guardarPersona(persona3);
 		ml.guardarPersona(persona1);
 		ml.guardarPersona(persona2);
-		
+
 		assertEquals(persona3.getUltMod(), ml.getUltFechaMod());
 	}
-	
+
 	public void testUltFechaModFechaCero() {
 		ml.borrarTodo();
-		
+
 		assertEquals(Utils.FECHA_CERO, ml.getUltFechaMod());
 	}
-	
+
 	public void testUpdateNormal() {
-		ml.borrarTodo();		
+		ml.borrarTodo();
 		Persona personaNormal = PersonaTest.crearPersonaLatLngVariable();
-		LatLng nuevaUbicacion = new LatLng(-34.61509026099774, -58.55060879141091);
-		personaNormal.setUbicacion(nuevaUbicacion);	
-		ml.guardarPersona(personaNormal);		
-		personaNormal.setNombre("JuanPrueba");		
+		LatLng nuevaUbicacion = new LatLng(-34.61509026099774,
+				-58.55060879141091);
+		personaNormal.setUbicacion(nuevaUbicacion);
 		ml.guardarPersona(personaNormal);
-		
-		Persona personaEncontrada = ml.obtenerPersona(personaNormal.getUbicacion());
-		
+		personaNormal.setNombre("JuanPrueba");
+		ml.guardarPersona(personaNormal);
+
+		Persona personaEncontrada = ml.obtenerPersona(personaNormal
+				.getUbicacion());
+
 		assertEquals(personaNormal.getNombre(), personaEncontrada.getNombre());
 	}
-	
+
 	public void testUpdateProblematico() {
-		ml.borrarTodo();		
+		ml.borrarTodo();
 		Persona personaProblematica = PersonaTest.crearPersonaLatLngVariable();
-		LatLng nuevaUbicacion = new LatLng(-34.61509026099774, -58.550608791410916);
-		personaProblematica.setUbicacion(nuevaUbicacion);	
+		LatLng nuevaUbicacion = new LatLng(-34.6150902609977411111111,
+				-58.550608791410916);
+		personaProblematica.setUbicacion(nuevaUbicacion);
 		ml.guardarPersona(personaProblematica);
-		personaProblematica.setNombre("JuanPrueba");		
+		personaProblematica.setNombre("JuanPrueba");
 		ml.guardarPersona(personaProblematica);
-		
-		Persona personaEncontrada = ml.obtenerPersona(personaProblematica.getUbicacion());
-		
-		assertEquals(personaProblematica.getNombre(), personaEncontrada.getNombre());
+
+		Persona personaEncontrada = ml.obtenerPersona(personaProblematica
+				.getUbicacion());
+
+		Log.e(Utils.APPTAG, "nuevaUbicacion " + nuevaUbicacion.longitude);
+		assertEquals(personaProblematica.getNombre(),
+				personaEncontrada.getNombre());
 	}
 
 	@Override
