@@ -156,6 +156,34 @@ public class BDLocalTest extends AndroidTestCase {
 		
 		assertEquals(Utils.FECHA_CERO, ml.getUltFechaMod());
 	}
+	
+	public void testUpdateNormal() {
+		ml.borrarTodo();		
+		Persona personaNormal = PersonaTest.crearPersonaLatLngVariable();
+		LatLng nuevaUbicacion = new LatLng(-34.61509026099774, -58.55060879141091);
+		personaNormal.setUbicacion(nuevaUbicacion);	
+		ml.guardarPersona(personaNormal);		
+		personaNormal.setNombre("JuanPrueba");		
+		ml.guardarPersona(personaNormal);
+		
+		Persona personaEncontrada = ml.obtenerPersona(personaNormal.getUbicacion());
+		
+		assertEquals(personaNormal.getNombre(), personaEncontrada.getNombre());
+	}
+	
+	public void testUpdateProblematico() {
+		ml.borrarTodo();		
+		Persona personaProblematica = PersonaTest.crearPersonaLatLngVariable();
+		LatLng nuevaUbicacion = new LatLng(-34.61509026099774, -58.550608791410916);
+		personaProblematica.setUbicacion(nuevaUbicacion);	
+		ml.guardarPersona(personaProblematica);
+		personaProblematica.setNombre("JuanPrueba");		
+		ml.guardarPersona(personaProblematica);
+		
+		Persona personaEncontrada = ml.obtenerPersona(personaProblematica.getUbicacion());
+		
+		assertEquals(personaProblematica.getNombre(), personaEncontrada.getNombre());
+	}
 
 	@Override
 	protected void tearDown() {
