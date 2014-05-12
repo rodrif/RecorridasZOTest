@@ -78,6 +78,18 @@ public class BDLocalTest extends AndroidTestCase {
 				0.000001);
 	}
 
+	public void testObtenerPersonaPorId() {
+		ml.borrarTodo();
+		Persona persona = new Persona("Alberto", "apellido", new LatLng(-10.0,
+				12.0));
+		persona.setId(34);
+		Persona otra = PersonaTest.crearPersonaLatLngVariable();
+		ml.guardarPersona(persona);
+		ml.guardarPersona(otra);
+
+		assertEquals(34, ml.obtenerPersonaPorId(persona.getId()).getId());
+	}
+
 	public void testRegistrosIguales() {
 		ml.borrarTodo();
 		Persona nuevaPersona = PersonaTest.crearPersona();
@@ -220,16 +232,16 @@ public class BDLocalTest extends AndroidTestCase {
 
 		assertEquals(1, ml.selectTodoPersonas().size());
 	}
-	
+
 	public void testInsertarPersonaDistinta() {
 		ml.borrarTodo();
 		Persona persona = PersonaTest.crearPersonaLatLngVariable();
 		ml.guardarPersona(persona);
-		
-		LatLng ubicacionParecida = new LatLng(persona.getLatitud()
-				+ 2 * Utils.PRECISION, persona.getLongitud());
+
+		LatLng ubicacionParecida = new LatLng(persona.getLatitud() + 2
+				* Utils.PRECISION, persona.getLongitud());
 		persona.setUbicacion(ubicacionParecida);
-		
+
 		ml.guardarPersona(persona);
 
 		assertEquals(2, ml.selectTodoPersonas().size());

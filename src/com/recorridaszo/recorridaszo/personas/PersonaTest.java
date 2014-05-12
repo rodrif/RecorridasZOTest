@@ -14,7 +14,7 @@ public class PersonaTest extends AndroidTestCase {
 	}
 
 	public static Persona crearPersona() {
-		Persona persona = new Persona(10, "nom", "ap", "murguiondo", "Ramos",
+		Persona persona = new Persona(-1, "nom", "ap", "murguiondo", "Ramos",
 				"descripcion1", new LatLng(-34.61509026099774, -58.42213869094848), Utils.getDateTime(),
 				Utils.EST_NUEVO);
 
@@ -34,7 +34,7 @@ public class PersonaTest extends AndroidTestCase {
 		String fecha = Utils.getDateTime();
 		Persona persona = PersonaTest.crearPersona();
 
-		assertEquals(10, persona.getId());
+		assertEquals(-1, persona.getId());
 		assertEquals("nom", persona.getNombre());
 		assertEquals("ap", persona.getApellido());
 		assertEquals("murguiondo", persona.getDireccion());

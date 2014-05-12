@@ -9,6 +9,7 @@ import com.recorridaszo.persona.Personas;
 import com.recorridaszo.recorridaszo.MapaActivity;
 import com.recorridaszo.recorridaszo.personas.PersonaTest;
 
+
 public class MapaActivityTest extends
 		ActivityInstrumentationTestCase2<MapaActivity> {
 
@@ -38,16 +39,25 @@ public class MapaActivityTest extends
 		Personas p = ml.selectTodoPersonas();
 		assertEquals(0, p.size());
 
-		mw.insertar(unaPersona, activity, null);		
-		mw.obtenerPersonasDBWeb(activity, null);		
+		mw.insertar(unaPersona, activity, null);
+		mw.obtenerPersonasDBWeb(activity, null);
 
-		p = ml.selectTodoPersonas();		
-		
+		p = ml.selectTodoPersonas();
+
 		assertEquals(1, p.size());
 	}
-
+//TODO
+/*	public void testDragMarcador() {
+		ml.borrarTodo();
+		Persona persona = PersonaTest.crearPersonaLatLngVariable();
+		ml.guardarPersona(persona);
+		activity.cargarMarcadores();
+		
+//		activity.getMap()
+	}
+*/
 	@Override
 	protected void tearDown() {
-		ManejadorBDWeb.setMock(false);	
+		ManejadorBDWeb.setMock(false);
 	}
 }
